@@ -33,7 +33,7 @@ export const portfolioData = {
       'MERN Stack Developer building production-grade full-stack applications with clean architecture, backend systems, and AI-powered features.',
     linkedin: 'https://linkedin.com/in/arjun-pj',
     github: 'https://github.com/arjunpj-11',
-    email: 'hello@arjunpj.dev',
+    email: 'arjunpj11@gmail.com',
     location: 'Kerala, India',
     available: true,
     stats: [
