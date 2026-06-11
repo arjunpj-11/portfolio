@@ -144,7 +144,7 @@ export const portfolioData = {
         'A production-grade AI-powered learning platform with personalized roadmaps, lesson-based AI chat, in-browser code execution, activity heatmaps, progress tracking, and hardened auth — OAuth, 2FA, refresh-token rotation, CSRF protection and security audit logging.',
       stack: 'React · TypeScript · Express · MongoDB · Redis · BullMQ · Socket.io',
       github: 'https://github.com/arjunpj-11/Imminiq',
-      socialPreviewImage: '/project-previews/Imminiq.png',
+      socialPreviewImage: '/project-previews/Imminiq.jpeg',
       socialPreviewAlt: 'Imminiq GitHub social preview',
       accent: '01',
     },
