@@ -19,29 +19,43 @@ export default function Loader({ onDone }: LoaderProps) {
   const [progress, setProgress] = useState(0)
   const [hiding, setHiding] = useState(false)
 
-  useEffect(() => {
-    const wordTimer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % greetings.length)
-    }, 430)
+useEffect(() => {
+  const TOTAL_WORDS = greetings.length        // 7
+  const MS_PER_WORD = 420
+  const TOTAL_MS    = TOTAL_WORDS * MS_PER_WORD + 600
 
-    const progressTimer = window.setInterval(() => {
-      setProgress((current) => {
-        const next = Math.min(current + 4, 100)
-        if (next >= 100) {
-          window.clearInterval(progressTimer)
-          window.clearInterval(wordTimer)
-          window.setTimeout(() => setHiding(true), 350)
-          window.setTimeout(onDone, 980)
-        }
-        return next
-      })
-    }, 65)
+  const TICK_MS     = 60
+  const INCREMENT   = 100 / (TOTAL_MS / TICK_MS)
 
-    return () => {
-      window.clearInterval(wordTimer)
-      window.clearInterval(progressTimer)
+  let currentIndex = 0
+
+  const wordTimer = window.setInterval(() => {
+    currentIndex += 1
+    if (currentIndex >= TOTAL_WORDS) {
+      window.clearInterval(wordTimer)   
+      return
     }
-  }, [onDone])
+    setIndex(currentIndex)
+  }, MS_PER_WORD)
+
+  const progressTimer = window.setInterval(() => {
+    setProgress((c) => {
+      const next = Math.min(c + INCREMENT, 100)
+      if (next >= 100) {
+        window.clearInterval(progressTimer)
+        window.clearInterval(wordTimer)
+        window.setTimeout(() => setHiding(true), 350)
+        window.setTimeout(onDone, 980)
+      }
+      return next
+    })
+  }, TICK_MS)
+
+  return () => {
+    window.clearInterval(wordTimer)
+    window.clearInterval(progressTimer)
+  }
+}, [onDone])
 
   return (
     <div id="loader" className={hiding ? 'hide' : ''} role="status" aria-label="Loading portfolio">

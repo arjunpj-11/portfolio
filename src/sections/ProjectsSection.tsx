@@ -35,7 +35,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                       loading={index === 0 ? 'eager' : 'lazy'}
                       decoding="async"
                       onError={(e) => {
-                        e.currentTarget.src = '/project-previews/Imminiq.png'
+                        e.currentTarget.src = '/project-previews/Imminiq.jpeg'
                         e.currentTarget.onerror = null
                       }}
                     />

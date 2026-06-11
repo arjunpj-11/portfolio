@@ -1,20 +1,17 @@
 import { useState } from 'react'
 
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
+  { href: '#about',      label: 'About' },
+  { href: '#skills',     label: 'Skills' },
   { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#projects',   label: 'Projects' },
+  { href: '#contact',    label: 'Contact' },
 ]
 
-type NavProps = {
-  name: string
-}
+type NavProps = { name: string }
 
 export default function Nav({ name }: NavProps) {
   const [open, setOpen] = useState(false)
-
   const closeMenu = () => setOpen(false)
 
   return (
@@ -37,12 +34,10 @@ export default function Nav({ name }: NavProps) {
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
-          <span />
-          <span />
-          <span />
+          <span /><span /><span />
         </button>
       </nav>
-      <div className={`mobile-nav ${open ? 'open' : ''}`} id="mobile-nav" aria-hidden={!open}>
+      <div className={`mobile-nav${open ? ' open' : ''}`} id="mobile-nav" aria-hidden={!open}>
         {links.map((link) => (
           <a key={link.href} href={link.href} onClick={closeMenu} tabIndex={open ? 0 : -1}>
             {link.label}
