@@ -84,13 +84,17 @@
 
 /* ─── RESET / BASE ───────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip; /* clip vs hidden — won't break position:sticky */
+}
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-weight: 300;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   transition: background 0.3s ease, color 0.3s ease;
 }
 img { display: block; max-width: 100%; }
@@ -248,7 +252,11 @@ a { color: inherit; }
 .btn:hover { background: var(--text); color: var(--bg); }
 
 /* ─── HERO VISUAL ────────────────────────────────────────────────────────── */
-.hero-visual { position: relative; display: flex; align-items: center; justify-content: center; min-height: 540px; }
+.hero-visual {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 540px;
+  overflow: hidden; /* ← added: contains orbits so they don't bleed out */
+}
 .hero-photo-ring {
   width: 340px; height: 340px; border-radius: 50%;
   background: var(--bg-card); overflow: hidden; position: relative; z-index: 2;
@@ -485,7 +493,7 @@ a { color: inherit; }
 .loader-greeting-wrap {
   position: relative;
   height: 110px;
-  min-width: 480px;
+  min-width: min(480px, 88vw); /* ← fixed: was hardcoded 480px, caused overflow on phones */
   width: 90vw;
   max-width: 560px;
   overflow: visible;
@@ -674,6 +682,7 @@ body.cursor-active:has(.tag:hover) #cursor-ring {
   .hero-photo-ring { width: 260px; height: 260px; }
   .hero-orbit-1 { width: 330px; height: 330px; }
   .hero-orbit-2 { width: 400px; height: 400px; }
+  html { scroll-behavior: auto; } /* ← fixed: smooth + sticky stacks = scroll jank on mobile */
 }
 
 @media (max-width: 560px) {
